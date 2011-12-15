@@ -32,9 +32,29 @@ public class User {
 	@JoinColumn(name = "user")
 	private Set<Music>	musics;
 
+	public void addMusic(Music music) {
+
+		musics.add(music);
+	}
+
 	public Set<Music> getMusics() {
 
 		return musics;
+	}
+
+	public void setLogin(String login) {
+
+		this.login = login;
+	}
+
+	public void setPassword(String password) {
+
+		this.password = password;
+	}
+
+	public void setName(String name) {
+
+		this.name = name;
 	}
 
 	public String getLogin() {
