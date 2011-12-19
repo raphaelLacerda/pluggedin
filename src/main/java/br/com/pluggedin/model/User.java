@@ -1,46 +1,25 @@
 package br.com.pluggedin.model;
 
-import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
-import br.com.caelum.vraptor.ioc.Component;
-import br.com.caelum.vraptor.ioc.SessionScoped;
 
 @Entity
-@Component
-@SessionScoped
 public class User {
 
 	@Id
 	@NotNull
 	@Length(min = 3, max = 20)
-	private String		login;
+	private String	login;
 
 	@NotNull
 	@Length(min = 3, max = 20)
-	private String		password;
+	private String	password;
 
 	@NotNull
 	@Length(min = 3, max = 100)
-	private String		name;
-
-	@OneToMany
-	@JoinColumn(name = "user")
-	private Set<Music>	musics;
-
-	public void addMusic(Music music) {
-
-		musics.add(music);
-	}
-
-	public Set<Music> getMusics() {
-
-		return musics;
-	}
+	private String	name;
 
 	public void setLogin(String login) {
 

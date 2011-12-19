@@ -13,9 +13,20 @@
 <title>PluggedIN</title>
 </head>
 <body>
-
+	<script src="js/jquery-1.7.1.js"></script>
+	<script src="js/jquery-ui-1.8.16.js"></script>
 	<ul>
 		<c:forEach items="${errors }" var="error">
 			<li>${error.category} - ${error.message}</li>
 		</c:forEach>
 	</ul>
+	
+	<c:if test="${not empty userLogged.user }">
+
+		<a href="<c:url value="/logout"/>">Logout ${ userLogged.user.login }</a>
+	</c:if>
+	</br>	
+	<c:if test="${empty userLogged.user }">
+			<a href="<c:url value="/login"/>">Login</a>
+	</c:if>
+	<br/>
