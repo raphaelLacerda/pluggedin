@@ -5,9 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import br.com.pluggedin.model.Music;
-import br.com.pluggedin.model.User;
 
-public class TesteInsert {
+public class TesteDelete {
 
 	public static void main(String[] args) throws InterruptedException {
 
@@ -18,21 +17,11 @@ public class TesteInsert {
 
 		Transaction tx = session.beginTransaction();
 		tx.begin();
-		User user = new User("login");
-//		user = (User) session.load(User.class, "login");
-
-		Music music = new Music();
-		music.setName("cqc");
-		music.setArtist("artist");
-		music.setDescription("raphael henrique lacerda");
-		music.setUrlChord("dadasdas");
-		music.addUser(user);
-		music.addTags("programa band rafinha");
-
-		session.persist(music);
+		Music load = (Music) session.load(Music.class, (long)11);
+		session.delete(load);
 		tx.commit();
 
-		System.out.println(music);
+		System.out.println(load);
 
 	}
 }

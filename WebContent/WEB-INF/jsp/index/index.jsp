@@ -99,6 +99,10 @@
 		/* add padding to account for vertical scrollbar */
 		padding-right: 20px;
 	}
+	.ui-autocomplete-loading { 
+		background: white url('/images/loading.gif') right center no-repeat; 
+	}
+	#music { width: 25em; }
 	.ui-autocomplete {
 		height: 100px;
 	}

@@ -46,8 +46,7 @@ public class Database {
 	@Restrict(values = { "admin" })
 	public void buildBase() {
 
-		User user = new User();
-		user.setLogin("login");
+		User user = new User("login");
 		user.setPassword("123");
 		user.setName("name");
 		session.save(user);

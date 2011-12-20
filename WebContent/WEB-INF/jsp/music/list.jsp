@@ -27,7 +27,8 @@
 		<input type="text" name="music.urlChord" id="urlChord" value="${music.urlChord}"/>  
 		<label for="urlYoutubeVideo">UrlYoutubeVideo</label> 
 		<input type="text" name="music.urlYoutubeVideo" id="urlYoutubeVideo" value="${music.urlYoutubeVideo}"/>  
-			
+		<br/>			
+		<input type="text" name="tags" id="tags" value="${tags}" size="100"/>
 		<button type="submit" id="submit">
 			<fmt:message key="send" />
 		</button>

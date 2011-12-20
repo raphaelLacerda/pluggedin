@@ -28,8 +28,7 @@ public class LoginControllerTest extends AbstractTest {
 	@Test
 	public void userLoggedInWhenThereIsValidUser() {
 
-		User user = new User();
-		user.setLogin("rafa");
+		User user = new User("rafa");
 		user.setPassword("123");
 		when(userRepo.findUserByLoginAndPassword(user)).thenReturn(user);
 
@@ -41,8 +40,7 @@ public class LoginControllerTest extends AbstractTest {
 	@Test(expected = ValidationException.class)
 	public void userLoggedInButWhenUserNotFound() {
 
-		User user = new User();
-		user.setLogin("rafa");
+		User user = new User("rafa");
 		user.setPassword("123");
 		when(userRepo.findUserByLoginAndPassword(user)).thenReturn(null);
 
@@ -54,8 +52,7 @@ public class LoginControllerTest extends AbstractTest {
 	@Test
 	public void userLoggedOut() {
 
-		User user = new User();
-		user.setLogin("rafa");
+		User user = new User("rafa");
 		user.setPassword("123");
 		userInfo.login(user);
 		assertEquals(true, userInfo.isLogged());

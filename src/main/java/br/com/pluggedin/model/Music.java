@@ -1,7 +1,8 @@
 package br.com.pluggedin.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -49,24 +50,37 @@ public class Music {
 	@ManyToOne
 	private User		user;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(joinColumns = @JoinColumn(name = "music_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	@IndexedEmbedded
-	private Set<Tag>	tags	= new HashSet<Tag>();
+	private List<Tag>	tags	= new ArrayList<Tag>();
+
+	public void addTags(String tags) {
+
+		if (tags == null) {
+			return;
+		}
+		String[] tagsToSave = tags.split(" ");
+		for (String nameTag : tagsToSave) {
+			Tag tag = new Tag(nameTag);
+			this.tags.add(tag);
+		}
+
+	}
 
 	public void addUser(User user) {
 
 		this.user = user;
 	}
 
+	public List<Tag> getTags() {
+
+		return tags;
+	}
+
 	public void setDateRecorded(DateTime dateRecorded) {
 
 		this.dateRecorded = dateRecorded;
-	}
-
-	public void addTag(Tag tag) {
-
-		this.tags.add(tag);
 	}
 
 	public DateTime getDateRecorded() {
@@ -87,11 +101,6 @@ public class Music {
 	public void setUrlYoutubeVideo(String urlYoutubeVideo) {
 
 		this.urlYoutubeVideo = urlYoutubeVideo;
-	}
-
-	public Set<Tag> getTags() {
-
-		return tags;
 	}
 
 	public String getUrlChord() {
@@ -117,11 +126,6 @@ public class Music {
 	public String getArtist() {
 
 		return artist;
-	}
-
-	public void setId(long id) {
-
-		this.id = id;
 	}
 
 	public void setName(String name) {

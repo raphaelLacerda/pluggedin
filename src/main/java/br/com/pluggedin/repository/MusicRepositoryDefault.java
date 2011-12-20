@@ -62,7 +62,8 @@ public class MusicRepositoryDefault implements MusicRepository {
 	public List<Music> findMusics(String music) {
 
 		createFullTextSessionAndBuilder();
-		Query query = queryBuilder.keyword().onFields("artist", "description", "name").matching(music).createQuery();
+		Query query = queryBuilder.keyword().fuzzy().withThreshold(0.3f).onField("name").boostedTo(3f).andField("tags.name").boostedTo(2.5f)
+				.andField("artist").boostedTo(2f).andField("description").boostedTo(1f).matching(music).createQuery();
 		return fullTextSession.createFullTextQuery(query, Music.class).list();
 	}
 
@@ -70,7 +71,7 @@ public class MusicRepositoryDefault implements MusicRepository {
 	public List<Music> findMusicsWithName(String name) {
 
 		createFullTextSessionAndBuilder();
-		Query query = queryBuilder.keyword().fuzzy().withThreshold(0.3f).onField("name").matching(name).createQuery();
+		Query query = queryBuilder.keyword().fuzzy().withThreshold(0.2f).onField("name").matching(name).createQuery();
 		return fullTextSession.createFullTextQuery(query, Music.class).list();
 	}
 
@@ -78,7 +79,7 @@ public class MusicRepositoryDefault implements MusicRepository {
 	public List<Music> findMusicsFromArtist(String artist) {
 
 		createFullTextSessionAndBuilder();
-		Query query = queryBuilder.keyword().fuzzy().withThreshold(0.3f).onField("artist").matching(artist).createQuery();
+		Query query = queryBuilder.keyword().fuzzy().withThreshold(0.2f).onField("artist").matching(artist).createQuery();
 		return fullTextSession.createFullTextQuery(query, Music.class).list();
 	}
 

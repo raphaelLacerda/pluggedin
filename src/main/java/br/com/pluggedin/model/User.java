@@ -21,6 +21,16 @@ public class User {
 	@Length(min = 3, max = 100)
 	private String	name;
 
+	private User() {
+
+	}
+
+	public User(String login) {
+
+		this();
+		this.login = login;
+	}
+
 	public void setLogin(String login) {
 
 		this.login = login;

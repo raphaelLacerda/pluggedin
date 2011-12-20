@@ -21,8 +21,7 @@ public class AbstractTest {
 		result = new MockResult();
 		validator = new MockValidator();
 		userLogged = new UserLogged();
-		User user = new User();
-		user.setLogin("rafa");
+		User user = new User("rafa");
 		user.setPassword("123");
 		userLogged.login(user);
 

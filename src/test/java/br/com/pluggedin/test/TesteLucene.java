@@ -22,13 +22,15 @@ public class TesteLucene {
 		FullTextSession fullTextSession = Search.getFullTextSession(session);
 
 		QueryBuilder queryBuilder = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(Music.class).get();
-		Query query = queryBuilder.keyword().onFields("artist","description","name").matching("ab").createQuery();
-//		Query query = queryBuilder.keyword().onField("name").matching("bre").createQuery();
-//		Query query = queryBuilder.keyword().fuzzy().withThreshold(0.1f).onField("name").matching("be").createQuery();
-		
+//		Query query = queryBuilder.keyword().onFields("artist","description","name").matching("cae").createQuery();
+//		Query query = queryBuilder.keyword().fuzzy().withThreshold(0.3f).onField("name").boostedTo(2f).andField("artist").boostedTo(2f)
+//				.andField("tags").boostedTo(2f).andField("description").boostedTo(1f).matching("bes").createQuery();
+//		Query query = queryBuilder.keyword().onField("tags").matching("bes").createQuery();
+		Query query = queryBuilder.keyword().fuzzy().withThreshold(0.1f).onField("tags.name").matching("rafa").createQuery();
+
 		@SuppressWarnings("unchecked")
 		List<Music> list = fullTextSession.createFullTextQuery(query, Music.class).list();
-		
+
 		System.out.println(list);
 		System.exit(0);
 	}

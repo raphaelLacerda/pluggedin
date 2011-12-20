@@ -2,7 +2,6 @@ package br.com.pluggedin.controller;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import org.joda.time.DateTime;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -37,31 +36,22 @@ public class MusicController {
 	@Path({ "/music/search/{music}", "/music/search" })
 	public void search(String music) {
 
-		Set<Music> musics = new HashSet<Music>();
-		List<Music> allMusics = musicRepo.findMusics(music);
-		musics.addAll(allMusics);
-
-		if (allMusics.size() == 0) {
-			List<Music> musicFromArtist = musicRepo.findMusicsFromArtist(music);
-			musics.addAll(musicFromArtist);
-			List<Music> musicWithName = musicRepo.findMusicsWithName(music);
-			musics.addAll(musicWithName);
-		}
-
-		result.include("musics", musics);
+		result.include("musics", new HashSet<Music>(musicRepo.findMusics(music)));
 	}
 
 	@Get
-	@Path({"/musics/json","/musics/json/{music}"})
+	@Path({ "/musics/json", "/musics/json/{music}" })
 	public void listJson(String music) {
-		List<Music> musics; 
-		if(music==null) {
+
+		List<Music> musics;
+		if (music == null) {
 			musics = musicRepo.listAllMusics();
-		}else {
+		} else {
 			musics = musicRepo.findMusicsWithName(music);
 		}
-		if(musics.size()>0) {
+		if (musics.size() > 0) {
 			result.use(JSONSerialization.class).withoutRoot().from(musics).exclude("id").serialize();
+
 		}
 	}
 
@@ -86,11 +76,17 @@ public class MusicController {
 	}
 
 	@Post
-	public void save(Music music) {
+	public void save(Music music, String tags) {
 
+//		result.include("tags", tags);
+		if (music == null) {
+			result.redirectTo(this).list();
+			throw new IllegalArgumentException("Music is invalid");
+		}
+		music.addTags(tags);
 		music.addUser(userLogged.getUser());
-		music.setDateRecorded(new DateTime());
 		validar(music);
+		music.setDateRecorded(new DateTime());
 		musicRepo.saveMusic(music);
 		result.redirectTo(this).list();
 	}
@@ -98,7 +94,7 @@ public class MusicController {
 	private void validar(Music music) {
 
 		validator.validate(music);
-		validator.onErrorRedirectTo(this).list();
+		validator.onErrorUsePageOf(this).list();
 	}
 
 	private List<Music> getMusicsOfUser(String userLogin) {
