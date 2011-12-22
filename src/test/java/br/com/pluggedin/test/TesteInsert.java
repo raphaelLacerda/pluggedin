@@ -18,18 +18,21 @@ public class TesteInsert {
 
 		Transaction tx = session.beginTransaction();
 		tx.begin();
-		User user = new User("login");
+		User user = new User("teste");
 //		user = (User) session.load(User.class, "login");
+//		user.setPassword("123");
+//		user.setName("teste");
+//		session.saveOrUpdate(user);
+//		session.flush();
 
 		Music music = new Music();
 		music.setName("cqc");
 		music.setArtist("artist");
 		music.setDescription("raphael henrique lacerda");
-		music.setUrlChord("dadasdas");
 		music.addUser(user);
 		music.addTags("programa band rafinha");
 
-		session.persist(music);
+		session.saveOrUpdate(music);
 		tx.commit();
 
 		System.out.println(music);

@@ -2,7 +2,6 @@ package br.com.pluggedin.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
@@ -40,7 +41,6 @@ public class Music {
 	@NotNull
 	@Length(min = 3, max = 20)
 	private String		artist;
-	private String		urlChord;
 	private String		urlYoutubeVideo;
 
 	@Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
@@ -50,7 +50,13 @@ public class Music {
 	@ManyToOne
 	private User		user;
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany()
+	@Cascade(value = { CascadeType.SAVE_UPDATE })
+	@JoinTable(joinColumns = @JoinColumn(name = "music_id"), inverseJoinColumns = @JoinColumn(name = "chord_id"))
+	private List<Chord>	chords	= new ArrayList<Chord>();
+
+	@ManyToMany()
+	@Cascade(value = { CascadeType.SAVE_UPDATE })
 	@JoinTable(joinColumns = @JoinColumn(name = "music_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	@IndexedEmbedded
 	private List<Tag>	tags	= new ArrayList<Tag>();
@@ -60,9 +66,9 @@ public class Music {
 		if (tags == null) {
 			return;
 		}
-		String[] tagsToSave = tags.split(" ");
+		String[] tagsToSave = tags.split(",");
 		for (String nameTag : tagsToSave) {
-			Tag tag = new Tag(nameTag);
+			Tag tag = new Tag(nameTag.trim());
 			this.tags.add(tag);
 		}
 
@@ -103,11 +109,6 @@ public class Music {
 		this.urlYoutubeVideo = urlYoutubeVideo;
 	}
 
-	public String getUrlChord() {
-
-		return urlChord;
-	}
-
 	public long getId() {
 
 		return id;
@@ -143,14 +144,19 @@ public class Music {
 		this.artist = artist;
 	}
 
-	public void setUrlChord(String urlChord) {
-
-		this.urlChord = urlChord;
-	}
-
 	public void setUser(User user) {
 
 		this.user = user;
+	}
+
+	public List<Chord> getChords() {
+
+		return chords;
+	}
+
+	public void setChords(List<Chord> chords) {
+
+		this.chords = chords;
 	}
 
 	@Override
@@ -180,8 +186,7 @@ public class Music {
 	@Override
 	public String toString() {
 
-		return "Music [id=" + id + ", name=" + name + ", description=" + description + ", artist=" + artist + ", urlChord=" + urlChord
-				+ ", urlYoutubeVideo=" + urlYoutubeVideo + ", dateRecorded=" + dateRecorded + "]";
+		return "Music [id=" + id + ", name=" + name + ", description=" + description + ", artist=" + artist + ", urlYoutubeVideo=" + urlYoutubeVideo
+				+ ", dateRecorded=" + dateRecorded + "]";
 	}
-
 }

@@ -13,8 +13,8 @@
 <title>PluggedIN</title>
 </head>
 <body>
-	<script src="js/jquery-1.7.1.js"></script>
-	<script src="js/jquery-ui-1.8.16.js"></script>
+	<script src="<c:url value='/js/jquery-1.7.1.js'/>"></script>
+	<script src="<c:url value='/js/jquery-ui-1.8.16.js'/>"></script>
 	<ul>
 		<c:forEach items="${errors }" var="error">
 			<li>${error.category} - ${error.message}</li>

@@ -17,7 +17,7 @@ public class TesteDelete {
 
 		Transaction tx = session.beginTransaction();
 		tx.begin();
-		Music load = (Music) session.load(Music.class, (long)11);
+		Music load = (Music) session.load(Music.class, (long)1);
 		session.delete(load);
 		tx.commit();
 

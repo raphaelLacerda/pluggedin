@@ -1,5 +1,6 @@
 package br.com.pluggedin.component;
 
+import java.util.Arrays;
 import org.hibernate.Session;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
@@ -10,6 +11,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.com.pluggedin.controller.UserController;
+import br.com.pluggedin.model.Chord;
 import br.com.pluggedin.model.Music;
 import br.com.pluggedin.model.User;
 import br.com.pluggedin.secutiry.Restrict;
@@ -56,10 +58,10 @@ public class Database {
 			music.setArtist("artist" + i);
 			music.setDescription("descrption" + i);
 			music.setName("music" + i);
-			music.setUrlChord("chord" + i);
+			music.setChords(Arrays.asList(new Chord()));
 			music.setDateRecorded(new DateTime());
 			music.addUser(user);
-			
+
 			session.save(music);
 		}
 

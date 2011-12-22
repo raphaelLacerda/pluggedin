@@ -34,14 +34,36 @@
 		Search for a music
 		<br/><br/>
 		<form action="<c:url value="/music/search"/>" name="MusicForm" method="get">
-			<input
-				type="text" name="music" id="music" value="Search Here" size="100"/>
+			<input class="ui-autocomplete-input" name="music" id="musicInput" value="Search Here" size="100" 
+			autocomplete="list"/>
 			<button type="submit" id="submit">
 				<fmt:message key="send" />
 			</button>
 		</form>
 	</div>
-		
+	
+	<div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+
+
+
+	<style type="text/css">
+	   .ui-autocomplete {
+			max-height: 100px;
+			overflow-y: auto;
+			/* prevent horizontal scrollbar */
+			overflow-x: hidden;
+			/* add padding to account for vertical scrollbar */
+			padding-right: 20px;
+		}
+		.ui-autocomplete-loading { 
+			background: white url('/images/loading.gif') right center no-repeat; 
+		}
+		#music { width: 25em; }
+		.ui-autocomplete {
+			height: 100px;
+		}
+   </style>
+   		
 	<script type="text/javascript">
      $(document).ready(function(){
     	 //do something
@@ -59,14 +81,18 @@
      $("div#hide").click(function(){
 		 $("div#hide").hide('fast');
      });
-     $('input#music').click(function (){
+     $('input#musicInput').click(function (){
     	 $(this).val('');
      });
      
-	$( "input#music" ).autocomplete({
+     
+	$( "input#musicInput" ).autocomplete({
 		source: function( request, response ) {
 			$.ajax({
-				url: "<c:url value='/musics/json/"+ request.term +"'/>",
+				url: "<c:url value='/musics/json'/>",
+				data:{
+					"music":request.term
+				},
 				dataType: "json",
 				success: function( musics ) {
 					response( $.map( musics, function( item ) {
@@ -86,26 +112,16 @@
 			log( ui.item ?
 				"Selected: " + ui.item.label :
 				"Nothing selected, input was " + this.value);
+		},
+		open: function() {
+			$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+		},
+		close: function() {
+			$( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
 		}
 	});
-	
    </script>
-   <style type="text/css">
-   .ui-autocomplete {
-		max-height: 100px;
-		overflow-y: auto;
-		/* prevent horizontal scrollbar */
-		overflow-x: hidden;
-		/* add padding to account for vertical scrollbar */
-		padding-right: 20px;
-	}
-	.ui-autocomplete-loading { 
-		background: white url('/images/loading.gif') right center no-repeat; 
-	}
-	#music { width: 25em; }
-	.ui-autocomplete {
-		height: 100px;
-	}
-   </style>
+
+   
    
 <%@ include file="../footer.jsp"%>

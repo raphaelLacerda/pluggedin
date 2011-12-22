@@ -19,8 +19,9 @@ public class MusicTest extends AbstractTest {
 	public void addValidTags() {
 
 		assertEquals(0, music.getTags().size());
-		music.addTags("jobs apple pluggedin project");
+		music.addTags("jobs ,apple iwoz, pluggedin        ,project");
 		assertEquals(4, music.getTags().size());
+		assertEquals("pluggedin", music.getTags().get(2).getName());
 
 	}
 

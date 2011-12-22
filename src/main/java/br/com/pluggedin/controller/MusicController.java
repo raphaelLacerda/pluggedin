@@ -36,34 +36,32 @@ public class MusicController {
 	@Path({ "/music/search/{music}", "/music/search" })
 	public void search(String music) {
 
-		result.include("musics", new HashSet<Music>(musicRepo.findMusics(music)));
+		result.include("musics", new HashSet<Music>(getMusicsWith(music)));
 	}
 
 	@Get
 	@Path({ "/musics/json", "/musics/json/{music}" })
 	public void listJson(String music) {
 
-		List<Music> musics;
-		if (music == null) {
-			musics = musicRepo.listAllMusics();
-		} else {
-			musics = musicRepo.findMusicsWithName(music);
-		}
+		List<Music> musics = getMusicsWith(music);
 		if (musics.size() > 0) {
 			result.use(JSONSerialization.class).withoutRoot().from(musics).exclude("id").serialize();
-
 		}
 	}
 
 	@Get
-	@Path("/musics/xml")
-	public void listXML() {
+	@Path({ "/musics/xml", "/musics/xml/{music}" })
+	public void listXML(String music) {
 
-		result.use(XMLSerialization.class).from(musicRepo.listAllMusics()).exclude("id").serialize();
+		List<Music> musics = getMusicsWith(music);
+		if (musics.size() > 0) {
+			result.use(XMLSerialization.class).from(musics).exclude("id").serialize();
+		}
+
 	}
 
 	@Path({ "/musics", "/music/list" })
-	public List<Music> list() {
+	public List<Music> listMusicsUser() {
 
 		List<Music> allMusicsOfUser = getMusicsOfUser(userLogged.getUser().getLogin());
 		if (allMusicsOfUser.size() > 5) {
@@ -80,7 +78,7 @@ public class MusicController {
 
 //		result.include("tags", tags);
 		if (music == null) {
-			result.redirectTo(this).list();
+			result.redirectTo(this).listMusicsUser();
 			throw new IllegalArgumentException("Music is invalid");
 		}
 		music.addTags(tags);
@@ -88,18 +86,29 @@ public class MusicController {
 		validar(music);
 		music.setDateRecorded(new DateTime());
 		musicRepo.saveMusic(music);
-		result.redirectTo(this).list();
+		result.redirectTo(this).listMusicsUser();
 	}
 
 	private void validar(Music music) {
 
 		validator.validate(music);
-		validator.onErrorUsePageOf(this).list();
+		validator.onErrorUsePageOf(this).listMusicsUser();
 	}
 
 	private List<Music> getMusicsOfUser(String userLogin) {
 
 		List<Music> allMusicsOfUser = musicRepo.listAllMusicsOfUser(userLogin);
 		return allMusicsOfUser;
+	}
+
+	private List<Music> getMusicsWith(String music) {
+
+		List<Music> musics;
+		if (music == null) {
+			musics = musicRepo.listAllMusics();
+		} else {
+			musics = musicRepo.findMusics(music);
+		}
+		return musics;
 	}
 }
