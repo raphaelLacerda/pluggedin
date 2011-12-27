@@ -49,7 +49,7 @@ public class LoginController {
 	private void keepUser(final User currentUser) {
 
 		userInfo.login(currentUser);
-		result.redirectTo(MusicController.class).listMusicsUser();
+		result.redirectTo(MusicController.class).list();
 	}
 
 	private void validate(final User currentUser) {

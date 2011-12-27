@@ -61,7 +61,7 @@ public class Music {
 	@IndexedEmbedded
 	private List<Tag>	tags	= new ArrayList<Tag>();
 
-	public void addTags(String tags) {
+	public void setTags(String tags) {
 
 		if (tags == null) {
 			return;
@@ -74,7 +74,7 @@ public class Music {
 
 	}
 
-	public void addUser(User user) {
+	public void setUser(User user) {
 
 		this.user = user;
 	}
@@ -142,11 +142,6 @@ public class Music {
 	public void setArtist(String artist) {
 
 		this.artist = artist;
-	}
-
-	public void setUser(User user) {
-
-		this.user = user;
 	}
 
 	public List<Chord> getChords() {

@@ -5,21 +5,19 @@ import org.apache.lucene.search.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.search.FullTextSession;
-import org.hibernate.search.Search;
-import org.hibernate.search.query.dsl.QueryBuilder;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.pluggedin.model.Music;
 
 @Component
 @SuppressWarnings("unchecked")
-public class MusicRepositoryDefault implements MusicRepository {
+public class MusicRepositoryDefault extends AbstractRepository implements MusicRepository {
 
 	private final Session	session;
 	private DAO<Music>		dao;
 
 	public MusicRepositoryDefault(Session session) {
 
+		super(session);
 		this.session = session;
 		this.dao = new DAO<Music>(Music.class, session);
 	}
@@ -55,9 +53,6 @@ public class MusicRepositoryDefault implements MusicRepository {
 
 	}
 
-	private FullTextSession	fullTextSession;
-	private QueryBuilder	queryBuilder;
-
 	@Override
 	public List<Music> findMusics(String music) {
 
@@ -83,19 +78,10 @@ public class MusicRepositoryDefault implements MusicRepository {
 		return fullTextSession.createFullTextQuery(query, Music.class).list();
 	}
 
-	private void createFullTextSessionAndBuilder() {
+	@Override
+	protected Class<?> getClassToSearch() {
 
-		if (fullTextSession == null) {
-			this.fullTextSession = Search.getFullTextSession(session);
-			createBuilder();
-
-		}
-	}
-
-	private void createBuilder() {
-
-		if (queryBuilder == null)
-			this.queryBuilder = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(Music.class).get();
+		return Music.class;
 	}
 
 }

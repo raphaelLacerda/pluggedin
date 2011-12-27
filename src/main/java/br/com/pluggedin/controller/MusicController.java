@@ -39,6 +39,34 @@ public class MusicController {
 		result.include("musics", new HashSet<Music>(getMusicsWith(music)));
 	}
 
+	@Path({ "/musics", "/music/list" })
+	public List<Music> list() {
+
+		List<Music> allMusicsOfUser = getMusicsOfUser(userLogged.getUser().getLogin());
+		if (allMusicsOfUser.size() > 5) {
+
+			List<Music> lastFiveMusics = allMusicsOfUser.subList(0, 5);
+			result.include("lastFiveMusics", lastFiveMusics);
+		}
+		return allMusicsOfUser;
+
+	}
+
+	@Post
+	public void save(Music music, String tags) {
+
+		if (music == null) {
+			result.redirectTo(this).list();
+			throw new IllegalArgumentException("Music is invalid");
+		}
+		music.setTags(tags);
+		music.setUser(userLogged.getUser());
+		validar(music);
+		music.setDateRecorded(new DateTime());
+		musicRepo.saveMusic(music);
+		result.redirectTo(this).list();
+	}
+
 	@Get
 	@Path({ "/musics/json", "/musics/json/{music}" })
 	public void listJson(String music) {
@@ -60,39 +88,10 @@ public class MusicController {
 
 	}
 
-	@Path({ "/musics", "/music/list" })
-	public List<Music> listMusicsUser() {
-
-		List<Music> allMusicsOfUser = getMusicsOfUser(userLogged.getUser().getLogin());
-		if (allMusicsOfUser.size() > 5) {
-
-			List<Music> lastFiveMusics = allMusicsOfUser.subList(0, 5);
-			result.include("lastFiveMusics", lastFiveMusics);
-		}
-		return allMusicsOfUser;
-
-	}
-
-	@Post
-	public void save(Music music, String tags) {
-
-//		result.include("tags", tags);
-		if (music == null) {
-			result.redirectTo(this).listMusicsUser();
-			throw new IllegalArgumentException("Music is invalid");
-		}
-		music.addTags(tags);
-		music.addUser(userLogged.getUser());
-		validar(music);
-		music.setDateRecorded(new DateTime());
-		musicRepo.saveMusic(music);
-		result.redirectTo(this).listMusicsUser();
-	}
-
 	private void validar(Music music) {
 
 		validator.validate(music);
-		validator.onErrorUsePageOf(this).listMusicsUser();
+		validator.onErrorUsePageOf(this).list();
 	}
 
 	private List<Music> getMusicsOfUser(String userLogin) {

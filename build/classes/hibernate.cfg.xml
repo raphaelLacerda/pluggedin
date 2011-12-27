@@ -64,6 +64,7 @@
 		<mapping class="br.com.pluggedin.model.Music" />
 		<mapping class="br.com.pluggedin.model.Tag" />
 		<mapping class="br.com.pluggedin.model.Chord" />
+		<mapping class="br.com.pluggedin.model.Playlist" />
 
 	</session-factory>
 

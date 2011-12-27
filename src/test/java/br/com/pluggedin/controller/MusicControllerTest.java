@@ -34,7 +34,7 @@ public class MusicControllerTest extends AbstractTest {
 		List<Music> musics = Arrays.asList(new Music(), new Music(), new Music(), new Music(), new Music(), new Music(), new Music());
 		when(musicRepo.listAllMusicsOfUser("rafa")).thenReturn(musics);
 
-		List<Music> allMusics = controller.listMusicsUser();
+		List<Music> allMusics = controller.list();
 
 		assertEquals(5, ((List) result.included("lastFiveMusics")).size());
 		assertEquals(7, allMusics.size());
@@ -46,7 +46,7 @@ public class MusicControllerTest extends AbstractTest {
 		List<Music> musics = Arrays.asList(new Music(), new Music());
 		when(musicRepo.listAllMusicsOfUser("rafa")).thenReturn(musics);
 
-		List<Music> allMusics = controller.listMusicsUser();
+		List<Music> allMusics = controller.list();
 
 		assertNull(result.included("lastFiveMusics"));
 		assertEquals(2, allMusics.size());
@@ -62,7 +62,7 @@ public class MusicControllerTest extends AbstractTest {
 		assertNull(music.getDateRecorded());
 		assertNull(music.getUser());
 
-		controller.save(music, "pluggedin music test");
+		controller.save(music, "pluggedin, music, test");
 
 		assertNotNull(music.getDateRecorded());
 		assertEquals(userLogged.getUser(), music.getUser());
@@ -73,7 +73,7 @@ public class MusicControllerTest extends AbstractTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void saveInvalidMusic() {
 		
-		controller.save(null, "pluggedin music test");
+		controller.save(null, "pluggedin, music ,test");
 		
 	}
 }

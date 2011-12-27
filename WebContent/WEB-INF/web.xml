@@ -26,6 +26,16 @@
 		<param-value>br.com.caelum.vraptor.util.hibernate</param-value>
 	</context-param>
 
+	<context-param>
+		<param-name>facebook_api_key</param-name>
+<!-- 		<param-value>100002556737230</param-value> -->
+		<param-value>5f06856d94024c1cad07731ddcb00d8c</param-value>
+	</context-param>
+	<context-param>
+		<param-name>facebook_secret</param-name>
+		<param-value>teste2323</param-value>
+	</context-param>
+
 	<error-page>
 		<error-code>500</error-code>
 		<location>/error.jsp</location>
@@ -34,4 +44,5 @@
 		<error-code>404</error-code>
 		<location>/error.jsp</location>
 	</error-page>
+
 </web-app>

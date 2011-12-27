@@ -1,12 +1,13 @@
 package br.com.pluggedin.repository;
 
 import java.util.List;
+import org.apache.lucene.search.Query;
 import org.hibernate.Session;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.pluggedin.model.User;
 
 @Component
-public class UserRepositoryDefault implements UserRepository {
+public class UserRepositoryDefault extends AbstractRepository implements UserRepository {
 
 	private final Session	session;
 
@@ -14,6 +15,7 @@ public class UserRepositoryDefault implements UserRepository {
 
 	public UserRepositoryDefault(Session session) {
 
+		super(session);
 		this.session = session;
 		dao = new DAO<User>(User.class, session);
 	}
@@ -29,6 +31,15 @@ public class UserRepositoryDefault implements UserRepository {
 
 		return (User) session.createQuery("from User where login = :login and password = :pass").setParameter("login", user.getLogin())
 				.setParameter("pass", user.getPassword()).uniqueResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> findUsers(String user) {
+
+		createFullTextSessionAndBuilder();
+		Query query = queryBuilder.keyword().fuzzy().withThreshold(0.2f).onField("name").andField("login").matching(user).createQuery();
+		return fullTextSession.createFullTextQuery(query, User.class).list();
 	}
 
 	@Override
@@ -48,5 +59,11 @@ public class UserRepositoryDefault implements UserRepository {
 	public void refreshUser(User user) {
 
 		dao.refresh(user);
+	}
+
+	@Override
+	protected Class<?> getClassToSearch() {	
+
+		return User.class;
 	}
 }

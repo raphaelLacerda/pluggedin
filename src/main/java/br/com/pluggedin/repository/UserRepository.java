@@ -15,4 +15,6 @@ public interface UserRepository {
 
 	void refreshUser(User user);
 
+	List<User> findUsers(String user);
+
 }

@@ -3,9 +3,17 @@ package br.com.pluggedin.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
+@Indexed
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class User {
 
 	@Id
@@ -19,15 +27,19 @@ public class User {
 
 	@NotNull
 	@Length(min = 3, max = 100)
+	@Field(index = Index.TOKENIZED)
 	private String	name;
+	
+	@NotNull
+	@Email
+	private String	email;
 
-	private User() {
+	public User() {
 
 	}
 
 	public User(String login) {
 
-		this();
 		this.login = login;
 	}
 
@@ -59,6 +71,16 @@ public class User {
 	public String getPassword() {
 
 		return password;
+	}
+
+	public String getEmail() {
+
+		return email;
+	}
+
+	public void setEmail(String email) {
+
+		this.email = email;
 	}
 
 	@Override

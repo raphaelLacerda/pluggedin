@@ -48,19 +48,27 @@ public class Database {
 	@Restrict(values = { "admin" })
 	public void buildBase() {
 
-		User user = new User("login");
-		user.setPassword("123");
-		user.setName("name");
-		session.save(user);
+		for (int i = 1; i < 5; i++) {
 
+			User user1 = new User("login" + i);
+			user1.setPassword("123");
+			user1.setName("name" + 1);
+			user1.setEmail(i + "lace@gma.com");
+			session.save(user1);
+
+		}
+
+		User user = new User("login1");
 		for (int i = 0; i < 10; i++) {
 			Music music = new Music();
 			music.setArtist("artist" + i);
 			music.setDescription("descrption" + i);
 			music.setName("music" + i);
+
 			music.setChords(Arrays.asList(new Chord()));
+			music.setTags("teste," + i);
 			music.setDateRecorded(new DateTime());
-			music.addUser(user);
+			music.setUser(user);
 
 			session.save(music);
 		}

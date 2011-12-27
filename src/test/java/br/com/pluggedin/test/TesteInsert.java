@@ -20,17 +20,18 @@ public class TesteInsert {
 		tx.begin();
 		User user = new User("teste");
 //		user = (User) session.load(User.class, "login");
-//		user.setPassword("123");
-//		user.setName("teste");
-//		session.saveOrUpdate(user);
-//		session.flush();
+		user.setPassword("123");
+		user.setName("teste");
+		user.setEmail("rafa@gac.com");
+		session.saveOrUpdate(user);
+		session.flush();
 
 		Music music = new Music();
 		music.setName("cqc");
 		music.setArtist("artist");
 		music.setDescription("raphael henrique lacerda");
-		music.addUser(user);
-		music.addTags("programa band rafinha");
+		music.setUser(user);
+		music.setTags("programa band rafinha");
 
 		session.saveOrUpdate(music);
 		tx.commit();

@@ -20,6 +20,7 @@ public interface MusicRepository {
 	List<Music> findMusicsWithName(String name);
 	
 	List<Music> findMusicsFromArtist(String artist);
+
 	
 
 	

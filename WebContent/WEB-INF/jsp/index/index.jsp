@@ -42,7 +42,17 @@
 		</form>
 	</div>
 	
-	<div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+	<div id="playlistSearch">
+		Search for a user playlist
+		<br/><br/>
+		<form action="<c:url value="/playlist"/>" name="MusicForm" method="get">
+			<input name="user.name" id="userInput" value="Type a user name" size="100" />
+			<button type="submit" id="submit">
+				<fmt:message key="send" />
+			</button>
+		</form>
+	</div>
+	
 
 
 
@@ -65,23 +75,27 @@
    </style>
    		
 	<script type="text/javascript">
-     $(document).ready(function(){
-    	 //do something
+     $(function(){
+    	 $("div#hide").hide();	 
+    	 $("<p>Hi there!</p>").insertAfter("#hide");
      });
-     $("div#hide").hide();
      
      //$("input#music").autocomplete({
 		//    source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
 	//	});
      
      $("div#test").click(function(){
-		 $("div#hide").show('slow');
+		 $("div#hide").fadeIn('slow');
 		 $("div#hide").html('I was hidden');
      });
      $("div#hide").click(function(){
-		 $("div#hide").hide('fast');
+		 $("div#hide").fadeOut('fast');
      });
      $('input#musicInput').click(function (){
+    	 $(this).val('');
+     });
+     
+     $('#userInput').click(function (){
     	 $(this).val('');
      });
      
