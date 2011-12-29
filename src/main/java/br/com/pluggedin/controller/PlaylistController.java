@@ -69,7 +69,7 @@ public class PlaylistController {
 
 		if (user == null || user.getName() == null) {
 			validator.add(new ValidationMessage("invalid", "invalid_parameter"));
-			validator.onErrorForwardTo(IndexController.class).index();
+			validator.onErrorForwardTo(IndexController.class).home();
 		}
 	}
 }

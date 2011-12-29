@@ -9,17 +9,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Type;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
 import org.hibernate.validator.constraints.Length;
 import org.joda.time.DateTime;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Indexed
 public class Playlist {
 
 	@Id
@@ -27,11 +32,12 @@ public class Playlist {
 	private long		id;
 
 	@NotNull
+	@Field(index = Index.TOKENIZED)
 	@Length(min = 3, max = 20)
 	private String		name;
 
-	@NotNull
-	@Length(min = 3, max = 20)
+	@Length(min = 3, max = 100)
+	@Field(index = Index.TOKENIZED)
 	private String		description;
 
 	@Length(min = 3, max = 20)
@@ -49,9 +55,30 @@ public class Playlist {
 	@ManyToOne
 	private User		user;
 
+	@PrePersist
+	public void setUp() {
+
+		this.dateRecorded = new DateTime();
+	}
+
 	public User getUser() {
 
 		return user;
+	}
+
+	public void setName(String name) {
+
+		this.name = name;
+	}
+
+	public void setDescription(String description) {
+
+		this.description = description;
+	}
+
+	public void setDateRecorded(DateTime dateRecorded) {
+
+		this.dateRecorded = dateRecorded;
 	}
 
 	public void setUser(User user) {

@@ -16,14 +16,14 @@ public class LoginController {
 
 	private final UserRepository	dao;
 	private final Result			result;
-	private final UserLogged		userInfo;
+	private final UserLogged		userLogged;
 	private final Validator			validator;
 
 	public LoginController(UserRepository dao, Result result, UserLogged userInfo, Validator validator) {
 
 		this.dao = dao;
 		this.result = result;
-		this.userInfo = userInfo;
+		this.userLogged = userInfo;
 		this.validator = validator;
 
 	}
@@ -31,8 +31,8 @@ public class LoginController {
 	@Path("/login")
 	public void login() {
 
-		if (userInfo.isLogged()) {
-			result.redirectTo(IndexController.class).index();
+		if (userLogged.isLogged()) {
+			result.redirectTo(IndexController.class).home();
 		}
 	}
 
@@ -48,7 +48,8 @@ public class LoginController {
 
 	private void keepUser(final User currentUser) {
 
-		userInfo.login(currentUser);
+		currentUser.addRole("admin");
+		userLogged.login(currentUser);
 		result.redirectTo(MusicController.class).list();
 	}
 
@@ -66,7 +67,7 @@ public class LoginController {
 	@Path("/logout")
 	public void logout() {
 
-		userInfo.logout();
-		result.redirectTo(IndexController.class).index();
+		userLogged.logout();
+		result.redirectTo(IndexController.class).home();
 	}
 }

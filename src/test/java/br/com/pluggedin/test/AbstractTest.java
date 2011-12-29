@@ -1,5 +1,6 @@
 package br.com.pluggedin.test;
 
+import net.vidageek.mirror.dsl.Mirror;
 import org.junit.Before;
 import org.mockito.MockitoAnnotations;
 import br.com.caelum.vraptor.util.test.MockResult;
@@ -12,12 +13,14 @@ public class AbstractTest {
 	protected MockResult	result;
 	protected MockValidator	validator;
 	protected UserLogged	userLogged;
+	protected Mirror		mirror;
 
 	@Before
 	public final void initAbstractTest() {
 
 		MockitoAnnotations.initMocks(this);
 
+		mirror = new Mirror();
 		result = new MockResult();
 		validator = new MockValidator();
 		userLogged = new UserLogged();

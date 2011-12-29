@@ -34,7 +34,7 @@ public class IndexController {
 	}
 
 	@Path({ "/", "/home" })
-	public List<Music> index() {
+	public List<Music> home() {
 
 		return musicRepository.listTheLastMusicsAdded(10);
 	}

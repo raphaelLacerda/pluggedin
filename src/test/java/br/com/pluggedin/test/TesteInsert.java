@@ -1,10 +1,13 @@
 package br.com.pluggedin.test;
 
+import java.util.Arrays;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import br.com.pluggedin.model.Chord;
 import br.com.pluggedin.model.Music;
+import br.com.pluggedin.model.Playlist;
 import br.com.pluggedin.model.User;
 
 public class TesteInsert {
@@ -31,9 +34,24 @@ public class TesteInsert {
 		music.setArtist("artist");
 		music.setDescription("raphael henrique lacerda");
 		music.setUser(user);
-		music.setTags("programa band rafinha");
+		music.setTags("programa, band, rafinha");
+
+		Chord chord = new Chord();
+		chord.setUrlChord("cifra1");
+		Chord chord1 = new Chord();
+		chord1.setUrlChord("cifra2");
+		music.setChords(Arrays.asList(chord, chord1));
 
 		session.saveOrUpdate(music);
+
+		Playlist playlist = new Playlist();
+		playlist.setCategory("rock");
+		playlist.setUser(user);
+		playlist.setName("lista1");
+		playlist.setDescription("lista para tocar em bar");
+		playlist.setMusics(Arrays.asList(music));
+
+		session.saveOrUpdate(playlist);
 		tx.commit();
 
 		System.out.println(music);

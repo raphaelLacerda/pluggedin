@@ -1,7 +1,12 @@
 package br.com.pluggedin.model;
 
+import static ch.lambdaj.Lambda.select;
+import static org.hamcrest.Matchers.equalTo;
+import java.util.Arrays;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -19,20 +24,23 @@ public class User {
 	@Id
 	@NotNull
 	@Length(min = 3, max = 20)
-	private String	login;
+	private String			login;
 
 	@NotNull
 	@Length(min = 3, max = 20)
-	private String	password;
+	private String			password;
 
 	@NotNull
 	@Length(min = 3, max = 100)
 	@Field(index = Index.TOKENIZED)
-	private String	name;
-	
+	private String			name;
+
+	@Transient
+	private List<String>	roles;
+
 	@NotNull
 	@Email
-	private String	email;
+	private String			email;
 
 	public User() {
 
@@ -41,6 +49,16 @@ public class User {
 	public User(String login) {
 
 		this.login = login;
+	}
+
+	public void addRole(String... roles) {
+
+		this.roles = Arrays.asList(roles);
+	}
+
+	public boolean hasRole(String role) {
+
+		return select(roles, equalTo(role)).size() > 0;
 	}
 
 	public void setLogin(String login) {
