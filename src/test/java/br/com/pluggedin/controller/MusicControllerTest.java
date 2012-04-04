@@ -11,8 +11,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import br.com.pluggedin.model.Music;
-import br.com.pluggedin.repository.MusicRepository;
+import br.com.pluggedin.application.controller.MusicController;
+import br.com.pluggedin.domain.model.Music;
+import br.com.pluggedin.domain.repository.MusicRepository;
 import br.com.pluggedin.test.AbstractTest;
 
 public class MusicControllerTest extends AbstractTest {

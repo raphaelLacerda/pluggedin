@@ -8,7 +8,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
-import br.com.pluggedin.model.Music;
+import br.com.pluggedin.domain.model.Music;
 
 public class TesteLucene {
 

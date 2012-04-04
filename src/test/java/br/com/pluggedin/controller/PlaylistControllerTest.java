@@ -10,9 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import br.com.caelum.vraptor.validator.ValidationException;
-import br.com.pluggedin.model.User;
-import br.com.pluggedin.repository.MusicRepository;
-import br.com.pluggedin.repository.UserRepository;
+import br.com.pluggedin.application.controller.PlaylistController;
+import br.com.pluggedin.domain.model.User;
+import br.com.pluggedin.domain.repository.MusicRepository;
+import br.com.pluggedin.domain.repository.UserRepository;
 import br.com.pluggedin.test.AbstractTest;
 
 public class PlaylistControllerTest extends AbstractTest {

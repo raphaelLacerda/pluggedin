@@ -11,7 +11,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 import br.com.caelum.vraptor.core.InterceptorStack;
 import br.com.caelum.vraptor.resource.ResourceMethod;
-import br.com.pluggedin.model.User;
+import br.com.pluggedin.application.security.Restrict;
+import br.com.pluggedin.application.security.RestrictionInterceptor;
+import br.com.pluggedin.domain.model.User;
 import br.com.pluggedin.test.AbstractTest;
 
 public class RestrictionInterceptorTest extends AbstractTest {

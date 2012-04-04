@@ -5,8 +5,8 @@ import org.junit.Before;
 import org.mockito.MockitoAnnotations;
 import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.caelum.vraptor.util.test.MockValidator;
-import br.com.pluggedin.component.UserLogged;
-import br.com.pluggedin.model.User;
+import br.com.pluggedin.application.component.UserLogged;
+import br.com.pluggedin.domain.model.User;
 
 public class AbstractTest {
 

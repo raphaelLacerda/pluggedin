@@ -6,9 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import br.com.caelum.vraptor.validator.ValidationException;
-import br.com.pluggedin.component.UserLogged;
-import br.com.pluggedin.model.User;
-import br.com.pluggedin.repository.UserRepository;
+import br.com.pluggedin.application.component.UserLogged;
+import br.com.pluggedin.application.controller.LoginController;
+import br.com.pluggedin.domain.model.User;
+import br.com.pluggedin.domain.repository.UserRepository;
 import br.com.pluggedin.test.AbstractTest;
 
 public class LoginControllerTest extends AbstractTest {

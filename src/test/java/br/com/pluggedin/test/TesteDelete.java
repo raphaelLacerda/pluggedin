@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import br.com.pluggedin.model.Music;
+import br.com.pluggedin.domain.model.Music;
 
 public class TesteDelete {
 

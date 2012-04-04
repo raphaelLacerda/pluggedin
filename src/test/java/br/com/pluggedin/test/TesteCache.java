@@ -4,8 +4,8 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import br.com.pluggedin.model.Music;
-import br.com.pluggedin.repository.MusicRepositoryDefault;
+import br.com.pluggedin.domain.model.Music;
+import br.com.pluggedin.infra.MusicRepositoryDefault;
 
 public class TesteCache {
 
