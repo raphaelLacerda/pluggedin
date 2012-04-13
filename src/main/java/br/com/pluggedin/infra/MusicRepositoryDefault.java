@@ -7,7 +7,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.pluggedin.domain.model.Music;
-import br.com.pluggedin.domain.repository.AbstractRepository;
 import br.com.pluggedin.domain.repository.MusicRepository;
 
 @Component

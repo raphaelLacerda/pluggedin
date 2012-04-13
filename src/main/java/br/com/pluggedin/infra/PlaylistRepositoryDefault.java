@@ -4,7 +4,6 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import br.com.pluggedin.domain.model.Playlist;
-import br.com.pluggedin.domain.repository.AbstractRepository;
 import br.com.pluggedin.domain.repository.PlaylistRepository;
 
 public class PlaylistRepositoryDefault extends AbstractRepository implements PlaylistRepository {

@@ -64,11 +64,11 @@
 
 
 		<!-- Model -->
-		<mapping class="br.com.pluggedin.model.User" />
-		<mapping class="br.com.pluggedin.model.Music" />
-		<mapping class="br.com.pluggedin.model.Tag" />
-		<mapping class="br.com.pluggedin.model.Chord" />
-		<mapping class="br.com.pluggedin.model.Playlist" />
+		<mapping class="br.com.pluggedin.domain.model.User" />
+		<mapping class="br.com.pluggedin.domain.model.Music" />
+		<mapping class="br.com.pluggedin.domain.model.Tag" />
+		<mapping class="br.com.pluggedin.domain.model.Chord" />
+		<mapping class="br.com.pluggedin.domain.model.Playlist" />
 
 	</session-factory>
 

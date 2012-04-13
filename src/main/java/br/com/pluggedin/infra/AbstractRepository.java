@@ -1,4 +1,4 @@
-package br.com.pluggedin.domain.repository;
+package br.com.pluggedin.infra;
 
 import org.hibernate.Session;
 import org.hibernate.search.FullTextSession;

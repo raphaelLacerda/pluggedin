@@ -1,11 +1,10 @@
 package br.com.pluggedin.test;
 
-import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import br.com.pluggedin.domain.model.Music;
-import br.com.pluggedin.infra.MusicRepositoryDefault;
 
 public class TesteCache {
 
@@ -16,15 +15,31 @@ public class TesteCache {
 		SessionFactory factory = configuration.buildSessionFactory();
 		Session session = factory.openSession();
 
-		MusicRepositoryDefault musicRepositoryDefault = new MusicRepositoryDefault(session);
+		Transaction tx = session.beginTransaction();
+		Music music = (Music) session.get(Music.class, 1L);
 
-		List<Music> listAllMusicsOfUser = musicRepositoryDefault.listAllMusicsOfUser("login");
-		System.out.println(listAllMusicsOfUser);
-
+		System.out.println(music.getName());
 		Session session1 = factory.openSession();
 
-		MusicRepositoryDefault musicRepositoryDefault1 = new MusicRepositoryDefault(session1);
-		List<Music> listAllMusicsOfUser2 = musicRepositoryDefault1.listAllMusicsOfUser("login");
-		System.out.println(listAllMusicsOfUser2);
+				
+		tx.commit();
+		
+		
+		Transaction tx1 = session1.beginTransaction();
+		
+		Music music1 = (Music) session1.get(Music.class, 1L);
+		System.out.println(music1.getName());
+
+		music1.setName("music1");
+
+		tx1.commit();
+		System.out.println(music == music1);
+		System.out.println(music.equals(music1));
+
+		System.out.println(session.contains(music));
+		System.out.println(session.contains(music1));
+
+		System.out.println(session1.contains(music));
+		System.out.println(session1.contains(music1));
 	}
 }

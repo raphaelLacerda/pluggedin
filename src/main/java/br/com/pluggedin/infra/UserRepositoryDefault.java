@@ -5,7 +5,6 @@ import org.apache.lucene.search.Query;
 import org.hibernate.Session;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.pluggedin.domain.model.User;
-import br.com.pluggedin.domain.repository.AbstractRepository;
 import br.com.pluggedin.domain.repository.UserRepository;
 
 @Component
