@@ -10,7 +10,7 @@ import org.hibernate.search.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import br.com.pluggedin.domain.model.Music;
 
-public class TesteLucene {
+public class TesteLucene extends AbstractTest{
 
 	public static void main(String[] args) throws InterruptedException {
 

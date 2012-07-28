@@ -6,7 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import br.com.pluggedin.domain.model.Music;
 
-public class TesteDelete {
+public class TesteDelete extends AbstractTest{
 
 	public static void main(String[] args) throws InterruptedException {
 

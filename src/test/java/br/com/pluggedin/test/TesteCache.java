@@ -6,7 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import br.com.pluggedin.domain.model.Music;
 
-public class TesteCache {
+public class TesteCache extends AbstractTest{
 
 	public static void main(String[] args) throws InterruptedException {
 

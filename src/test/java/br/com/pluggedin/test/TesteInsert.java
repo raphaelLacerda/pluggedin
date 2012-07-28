@@ -2,7 +2,7 @@ package br.com.pluggedin.test;
 
 import java.util.Random;
 
-public class TesteInsert {
+public class TesteInsert extends AbstractTest{
 
 	public static void main(String[] args) throws InterruptedException {
 

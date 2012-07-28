@@ -2,6 +2,7 @@ package br.com.pluggedin.test;
 
 import net.vidageek.mirror.dsl.Mirror;
 import org.junit.Before;
+import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.caelum.vraptor.util.test.MockValidator;
@@ -30,4 +31,8 @@ public class AbstractTest {
 
 	}
 
+	@Test
+	public void passMaven() {
+
+	}
 }
