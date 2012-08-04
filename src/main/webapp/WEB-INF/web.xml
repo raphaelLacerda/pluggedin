@@ -46,4 +46,13 @@
 		<location>/error.jsp</location>
 	</error-page>
 
+
+	<servlet>
+		<servlet-name>health</servlet-name>
+		<jsp-file>/health.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>health</servlet-name>
+		<url-pattern>/health</url-pattern>
+	</servlet-mapping>
 </web-app>

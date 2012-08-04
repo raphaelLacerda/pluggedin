@@ -2,9 +2,7 @@ package br.com.pluggedin.infra;
 
 import java.util.List;
 import org.hibernate.Session;
-import br.com.caelum.vraptor.ioc.Component;
 
-@Component
 public class DAO<T> {
 
 	private final Class<T>	classe;
