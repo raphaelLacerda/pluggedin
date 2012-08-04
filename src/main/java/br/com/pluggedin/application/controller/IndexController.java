@@ -17,9 +17,6 @@
 package br.com.pluggedin.application.controller;
 
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.pluggedin.domain.model.Music;
@@ -42,11 +39,4 @@ public class IndexController {
 		return musicRepository.listTheLastMusicsAdded(10);
 	}
 
-	
-	public static void main(String[] args) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
-		EntityManager em = emf.createEntityManager();
-		System.out.println(em);
-		
-	}
 }
