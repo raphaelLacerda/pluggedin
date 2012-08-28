@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>pluggedin</groupId>
 	<artifactId>pluggedin</artifactId>
@@ -15,7 +14,7 @@
 		<dependency>
 			<groupId>br.com.caelum</groupId>
 			<artifactId>vraptor</artifactId>
-			<version>3.4.0</version>
+			<version>3.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>c3p0</groupId>
@@ -28,6 +27,12 @@
 			<version>2.5.2</version>
 			<type>pom</type>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>net.sf.ehcache</groupId> -->
+		<!-- <artifactId>ehcache-core</artifactId> -->
+		<!-- <version>2.3.0</version> -->
+		<!-- </dependency> -->
+
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-terracotta</artifactId>
@@ -48,11 +53,21 @@
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
 			<version>1.0.1.Final</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<!-- <version>4.1.5.Final</version> -->
+			<version>3.6.10.Final</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>3.6.10.Final</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-search</artifactId>
@@ -122,8 +137,8 @@
 			<artifactId>xstream</artifactId>
 			<version>1.4.2</version>
 		</dependency>
-		
-		
+
+
 		<!-- <dependency> -->
 		<!-- <groupId>org.hibernate</groupId> -->
 		<!-- <artifactId>hibernate-c3p0</artifactId> -->
@@ -138,19 +153,64 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
-	
-	    <build>
-        <finalName>pluggedin</finalName>
-        <plugins>
-          <plugin>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>2.1.1</version>
-            <configuration>
-              <outputDirectory>deployments</outputDirectory>
-              <warName>ROOT</warName>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
- 
+
+	<build>
+		<finalName>pluggedin</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<outputDirectory>deployments</outputDirectory>
+					<warName>ROOT</warName>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+
+						<id>static-scanning</id>
+						<phase>package</phase>
+
+						<configuration>
+
+							<target>
+
+								<echo message="Starting static scanning process..." />
+
+
+								<path id="build.classpath">
+									<fileset dir="${project.build.directory}/${project.build.finalName}/WEB-INF/lib" includes="*.jar" />
+								</path>
+
+								<java classpathref="build.classpath" classname="br.com.caelum.vraptor.scan.VRaptorStaticScanning" fork="true">
+									<arg value="${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml" />
+									<classpath refid="build.classpath" />
+									<classpath path="${project.build.directory}/${project.build.finalName}/WEB-INF/classes" />
+								</java>
+
+								<war destfile="${project.build.directory}/${project.build.finalName}.war" webxml="${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml">
+									<fileset dir="${project.build.directory}/${project.build.finalName}" />
+								</war>
+
+								<echo message="Static scanning process finished!" />
+
+							</target>
+
+						</configuration>
+
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

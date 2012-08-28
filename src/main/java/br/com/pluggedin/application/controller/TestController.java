@@ -16,69 +16,31 @@
  */
 package br.com.pluggedin.application.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import br.com.caelum.vraptor.Get;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
-import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.view.Results;
-import br.com.pluggedin.domain.model.Music;
 
 @Resource
 public class TestController {
 
-	private final Result		result;
-
-	private static final Logger	logger	= LoggerFactory.getLogger(TestController.class);
-
-	public TestController(Result result) {
-
-		this.result = result;
-
+	private EntityManager entityManager;
+	public TestController(EntityManager entityManager) {
+		this.entityManager = entityManager;
+		
 	}
+	@Path("/test")
+	public void test() {
 
-	@Path("test")
-	public String test() {
-
-		result.include("hello", "requestInclude");
-		return "hello REquest";
+		System.out.println(entityManager);
 	}
-
-	public void test2() {
-
-	}
-
-	public void save(List<Music> musics) {
-
-		System.out.println(musics);
-		result.redirectTo(this).test();
-
-	}
-
-//	public void save(Music musics) {
-//
-//		System.out.println(musics);
-//		result.redirectTo(this).test();
-//
-//	}
-
-	@Get
-	@Path({ "test/chords/json", "test/chords/json/{chord}" })
-	public void listChords(String chord) {
-
-		Music music1 = new Music();
-		music1.setName("teste1");
-		Music music2 = new Music();
-		music2.setName("teste2");
-		Music music3 = new Music();
-		music3.setName("teste3");
-		List<Music> musics = new ArrayList<Music>();
-		musics.addAll(Arrays.asList(music1, music2, music3));
-		logger.debug("recebido request {}", chord);
-		result.use(Results.json()).withoutRoot().from(musics).exclude("id").serialize();
+	
+	public static void main(String[] args) {
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
+		EntityManager em = emf.createEntityManager();
+		System.out.println(em);
 	}
 }
