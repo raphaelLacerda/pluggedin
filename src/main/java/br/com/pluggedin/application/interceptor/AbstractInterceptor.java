@@ -1,4 +1,4 @@
-package br.com.pluggedin.application.security;
+package br.com.pluggedin.application.interceptor;
 
 import net.vidageek.mirror.dsl.Mirror;
 

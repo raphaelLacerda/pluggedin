@@ -8,8 +8,11 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
+import org.junit.Ignore;
+
 import br.com.pluggedin.domain.model.Music;
 
+@Ignore
 public class TesteLucene extends AbstractTest{
 
 	public static void main(String[] args) throws InterruptedException {

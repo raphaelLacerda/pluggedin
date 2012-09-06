@@ -1,4 +1,4 @@
-package br.com.pluggedin.application.security;
+package br.com.pluggedin.application.interceptor;
 
 import br.com.caelum.vraptor.InterceptionException;
 import br.com.caelum.vraptor.Intercepts;
@@ -9,6 +9,7 @@ import br.com.caelum.vraptor.ioc.RequestScoped;
 import br.com.caelum.vraptor.resource.ResourceMethod;
 import br.com.pluggedin.application.component.UserLogged;
 import br.com.pluggedin.application.controller.IndexController;
+import br.com.pluggedin.application.security.Restrict;
 
 @Intercepts
 @RequestScoped

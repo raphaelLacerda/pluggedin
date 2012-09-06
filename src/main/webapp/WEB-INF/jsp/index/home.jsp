@@ -1,6 +1,8 @@
 <%@ include file="../header.jsp"%>
 
 	<div id="presentation">
+		${msg}
+		<br/>
 		Welcome to the PluggedIN!
 		<br /> Aims to facilitate the search of musics that you like to play
 		<c:if test="${not empty userLogged.user }">
