@@ -158,19 +158,17 @@
 		</dependency>
 	</dependencies>
 
-	<build>
-		<finalName>pluggedin</finalName>
-		<plugins>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
-				<configuration>
-					<outputDirectory>deployments</outputDirectory>
-					<warName>ROOT</warName>
-				</configuration>
-			</plugin>
-
-
+<!-- 	<build> -->
+<!-- 		<finalName>pluggedin</finalName> -->
+<!-- 		<plugins> -->
+<!-- 			<plugin> -->
+<!-- 				<artifactId>maven-war-plugin</artifactId> -->
+<!-- 				<version>2.1.1</version> -->
+<!-- 				<configuration> -->
+<!-- 					<outputDirectory>deployments</outputDirectory> -->
+<!-- 					<warName>ROOT</warName> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
 <!-- 			<plugin> -->
 <!-- 				<groupId>org.apache.maven.plugins</groupId> -->
 <!-- 				<artifactId>maven-antrun-plugin</artifactId> -->
@@ -186,35 +184,27 @@
 <!-- 							<target> -->
 
 <!-- 								<echo message="Starting static scanning process..." /> -->
-
-
 <!-- 								<path id="build.classpath"> -->
 <!-- 									<fileset dir="${project.build.directory}/${project.build.finalName}/WEB-INF/lib" includes="*.jar" /> -->
 <!-- 								</path> -->
-
 <!-- 								<java classpathref="build.classpath" classname="br.com.caelum.vraptor.scan.VRaptorStaticScanning" fork="true"> -->
 <!-- 									<arg value="${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml" /> -->
 <!-- 									<classpath refid="build.classpath" /> -->
 <!-- 									<classpath path="${project.build.directory}/${project.build.finalName}/WEB-INF/classes" /> -->
 <!-- 								</java> -->
-
 <!-- 								<war destfile="${project.build.directory}/${project.build.finalName}.war" webxml="${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml"> -->
 <!-- 									<fileset dir="${project.build.directory}/${project.build.finalName}" /> -->
 <!-- 								</war> -->
-
 <!-- 								<echo message="Static scanning process finished!" /> -->
-
 <!-- 							</target> -->
-
 <!-- 						</configuration> -->
-
 <!-- 						<goals> -->
 <!-- 							<goal>run</goal> -->
 <!-- 						</goals> -->
 <!-- 					</execution> -->
 <!-- 				</executions> -->
 <!-- 			</plugin> -->
-		</plugins>
-	</build>
+<!-- 		</plugins> -->
+<!-- 	</build> -->
 
 </project>
