@@ -17,7 +17,7 @@
 
 
 <!-- 		<property name="hibernate.connection.datasource">java:comp/env/jdbc/pluggedin</property> -->
-		<property name="hibernate.connection.datasource">java:/pluggedin</property>
+		<property name="hibernate.connection.datasource">java:jboss/datasources/MysqlDS</property>
 
 
 		<!-- Hibernate Configs -->
