@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+	<display-name>PluggedIN</display-name>
+	<filter>
+		<filter-name>vraptor</filter-name>
+		<filter-class>br.com.caelum.vraptor.VRaptor</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>vraptor</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+	<context-param>
+		<param-name>br.com.caelum.vraptor.packages</param-name>
+		<param-value>br.com.caelum.vraptor.util.hibernate</param-value>
+	</context-param>
+
+
+	<!-- <context-param> -->
+	<!-- <param-name>br.com.caelum.vraptor.packages</param-name> -->
+	<!-- <param-value>br.com.caelum.vraptor.util.jpa</param-value> -->
+	<!-- </context-param> -->
+
+<!-- 	<context-param> -->
+<!-- 		<param-name>br.com.caelum.vraptor.provider</param-name> -->
+<!-- 		<param-value>br.com.caelum.vraptor.util.hibernate.HibernateCustomProvider</param-value> -->
+<!-- 	</context-param> -->
+
+
+	<!-- <context-param> -->
+	<!-- <param-name>facebook_api_key</param-name> -->
+	<!-- <param-value>100002556737230</param-value> -->
+	<!-- <param-value>5f06856d94024c1cad07731ddcb00d8c</param-value> -->
+	<!-- </context-param> -->
+	<!-- <context-param> -->
+	<!-- <param-name>facebook_secret</param-name> -->
+	<!-- <param-value>teste2323</param-value> -->
+	<!-- </context-param> -->
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error.jsp</location>
+	</error-page>
+
+
+	<servlet>
+		<servlet-name>health</servlet-name>
+		<jsp-file>/health.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>health</servlet-name>
+		<url-pattern>/health</url-pattern>
+	</servlet-mapping>
+</web-app>

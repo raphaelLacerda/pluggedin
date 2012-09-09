@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+
+		<!-- Jdbc configs -->
+
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/pluggedin</property> -->
+		<!-- <property name="hibernate.connection.username">root</property> -->
+		<!-- <property name="hibernate.connection.password">root</property> -->
+		<!-- <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property> -->
+
+
+
+<!-- 		<property name="hibernate.connection.datasource">java:comp/env/jdbc/pluggedin</property> -->
+		<property name="hibernate.connection.datasource">java:jboss/datasources/MysqlDS</property>
+
+
+		<!-- Hibernate Configs -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+		<!-- Hibernate Envers -->
+		<property name="hibernate.ejb.event.post-insert">org.hibernate.ejb.event.EJB3PostInsertEventListener,
+			org.hibernate.envers.event.AuditEventListener</property>
+		<property name="hibernate.ejb.event.post-update">org.hibernate.ejb.event.EJB3PostUpdateEventListener,
+			org.hibernate.envers.event.AuditEventListener</property>
+		<property name="hibernate.ejb.event.post-delete">org.hibernate.ejb.event.EJB3PostDeleteEventListener,
+			org.hibernate.envers.event.AuditEventListener</property>
+		<property name="hibernate.ejb.event.pre-collection-update">org.hibernate.envers.event.AuditEventListener</property>
+		<property name="hibernate.ejb.event.pre-collection-remove">org.hibernate.envers.event.AuditEventListener</property>
+		<property name="hibernate.ejb.event.post-collection-recreate">org.hibernate.envers.event.AuditEventListener</property>
+
+
+
+		<property name="hibernate.ejb.event.save">org.hibernate.ejb.event.EJB3SaveEventListener</property>
+
+
+		<!-- EhCache -->
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<!-- <property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property> -->
+		<property name="hibernate.cache.use_query_cache">true</property>
+		<property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.EhCacheRegionFactory</property>
+
+
+		<!-- c3p0 -->
+		<!-- <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property> -->
+		<!-- <property name="hibernate.c3p0.min_size">5</property> -->
+		<!-- <property name="hibernate.c3p0.max_size">20</property> -->
+		<!-- <property name="hibernate.c3p0.timeout">180</property> -->
+		<!-- <property name="hibernate.c3p0.idle_test_period">100</property> -->
+
+		<!-- Lucene -->
+
+		<property name="hibernate.search.default.directory_provider">org.hibernate.search.store.FSDirectoryProvider</property>
+		<property name="hibernate.search.default.indexBase">/var/tmp/pluggedin/lucene</property>
+		<!-- <property name="hibernate.search.analyzer">org.apache.lucene.analysis.br.BrazilianAnalyzer</property> -->
+		<property name="hibernate.search.analyzer">org.apache.lucene.analysis.standard.StandardAnalyzer</property>
+
+
+		<!-- JodaTIme -->
+		<property name="dateTime">org.joda.time.contrib.hibernate.PersistentDateTime</property>
+
+
+		<!-- Model -->
+		<mapping class="br.com.pluggedin.domain.model.User" />
+		<mapping class="br.com.pluggedin.domain.model.Music" />
+		<mapping class="br.com.pluggedin.domain.model.Tag" />
+		<mapping class="br.com.pluggedin.domain.model.Chord" />
+		<mapping class="br.com.pluggedin.domain.model.Playlist" />
+
+	</session-factory>
+
+</hibernate-configuration>
+	
