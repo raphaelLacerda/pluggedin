@@ -4,4 +4,4 @@ target
 .classpath
 .classpath2
 .DS_Store
-.deployments
+deployments

@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>pluggedin</groupId>
+	<groupId>br.com.pluggedin</groupId>
 	<artifactId>pluggedin</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
@@ -164,11 +164,11 @@
 		<finalName>pluggedin</finalName>
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<groupId>org.jenkinsci.plugins</groupId>
-					<artifactId>git</artifactId>
-					<version>1.1.23</version>
-				</plugin>
+<!-- 				<plugin> -->
+<!-- 					<groupId>org.jenkinsci.plugins</groupId> -->
+<!-- 					<artifactId>git</artifactId> -->
+<!-- 					<version>1.1.23</version> -->
+<!-- 				</plugin> -->
 
 				<plugin>
 					<artifactId>maven-war-plugin</artifactId>
@@ -229,39 +229,32 @@
 	</build>
 
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>repo.jenkins-ci.org</id>
-			<url>http://repo.jenkins-ci.org/public/</url>
-		</pluginRepository>
-	</pluginRepositories>
+<!-- 	<pluginRepositories> -->
+<!-- 		<pluginRepository> -->
+<!-- 			<id>repo.jenkins-ci.org</id> -->
+<!-- 			<url>http://repo.jenkins-ci.org/public/</url> -->
+<!-- 		</pluginRepository> -->
+<!-- 	</pluginRepositories> -->
 
-	<repositories>
+<!-- 	<repositories> -->
 
-		<repository>
-			<id>jgit-repository</id>
-			<name>Eclipse JGit Repository</name>
-			<url>http://download.eclipse.org/jgit/maven</url>
-		</repository>
+<!-- 		<repository> -->
+<!-- 			<id>jgit-repository</id> -->
+<!-- 			<name>Eclipse JGit Repository</name> -->
+<!-- 			<url>http://download.eclipse.org/jgit/maven</url> -->
+<!-- 		</repository> -->
 
-		<repository>
-			<id>guice-maven</id>
-			<name>guice maven</name>
-			<url>http://guice-maven.googlecode.com/svn/trunk</url>
-		</repository>
+<!-- 		<repository> -->
+<!-- 			<id>guice-maven</id> -->
+<!-- 			<name>guice maven</name> -->
+<!-- 			<url>http://guice-maven.googlecode.com/svn/trunk</url> -->
+<!-- 		</repository> -->
 
-		<repository>
-			<id>repo.jenkins-ci.org</id>
-			<url>http://repo.jenkins-ci.org/public/</url>
-		</repository>
-	</repositories>
-
-	<!-- <distributionManagement> -->
-	<!-- <repository> -->
-	<!-- <id>maven.jenkins-ci.org</id> -->
-	<!-- <url>http://maven.jenkins-ci.org:8081/content/repositories/releases/</url> -->
-	<!-- </repository> -->
-	<!-- </distributionManagement> -->
+<!-- 		<repository> -->
+<!-- 			<id>repo.jenkins-ci.org</id> -->
+<!-- 			<url>http://repo.jenkins-ci.org/public/</url> -->
+<!-- 		</repository> -->
+<!-- 	</repositories> -->
 
 
 </project>
