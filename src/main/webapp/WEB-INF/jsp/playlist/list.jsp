@@ -1,4 +1,4 @@
-<%@ include file="../header.jsp"%>
+<%@ include file="../../../template/header.jsp"%>
 
 
 User searched ${user.name}
@@ -21,4 +21,4 @@ ${musics}
 
 
 
-<%@ include file="../footer.jsp"%>
+<%@ include file="../../../template/footer.jsp"%>

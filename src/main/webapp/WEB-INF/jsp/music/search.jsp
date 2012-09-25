@@ -1,5 +1,5 @@
-<%@ include file="../header.jsp"%>
+<%@ include file="../../../template/header.jsp"%>
 Musics
 <br />
 ${musics} 
-<%@ include file="../footer.jsp"%>
+<%@ include file="../../../template/footer.jsp"%>

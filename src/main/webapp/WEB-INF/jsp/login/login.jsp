@@ -1,5 +1,5 @@
 
-<%@ include file="../header.jsp"%>
+<%@ include file="../../../template/header.jsp"%>
 <form action="<c:url value="/login/login"/>" name="loginForm"
 	method="post">
 	<fieldset>
@@ -15,4 +15,4 @@
 	</fieldset>
 </form>
 
-<%@ include file="../footer.jsp"%>
+<%@ include file="../../../template/footer.jsp"%>

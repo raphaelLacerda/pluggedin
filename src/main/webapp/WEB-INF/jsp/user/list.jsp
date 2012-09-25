@@ -1,4 +1,4 @@
-<%@ include file="../header.jsp"%>
+<%@ include file="../../../template/header.jsp"%>
 
 
 ${userList}
@@ -7,4 +7,4 @@ ${userList.size()}
 <c:if test="${userList.size() == 1}">
 	No Users
 </c:if>
-<%@ include file="../footer.jsp"%>
+<%@ include file="../../../template/footer.jsp"%>

@@ -1,106 +1,75 @@
-<%@ include file="../header.jsp"%>
+<%@ include file="../../../template/header.jsp"%>
 
-	<div id="presentation">
-		${msg}
-		<br/>
-		Welcome to the PluggedIN!
-		<br /> Aims to facilitate the search of musics that you like to play
-		<c:if test="${not empty userLogged.user }">
-			<br />
-			User Logged ${ userLogged.user.login}
-		</c:if>
-	</div>
-	<div id="test">
-		Click Here
-	</div>
-	<div id="hide">
-	</div>
-	
-	<div id="lastMusics">
-	<br/><br/><br/><br/><br/><br/>
-		The Last Musics added
-		<br/><br/>
-		<table>
-			<c:forEach var="_music" items="${musicList}">
-				<tr>
-					<td>${_music.user.login}</td>
-					<td>${_music.name}</td>
-					<td>${_music.artist}</td>
-					<td>${_music.dateRecorded}</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</div>
+<!-- Main hero unit for a primary marketing message or call to action -->
+<div class="hero-unit">
+	<h1>Welcome to the PluggedIN!</h1>
+	<p class="lead text-info">Aims to facilitate the search of the
+		musics that you like to play</p>
+	${msg} <br />
+	<c:if test="${not empty userLogged.user }">
+		<br />
+				User Logged ${ userLogged.user.login}
+			</c:if>
+	<p>
+		<a class="btn btn-primary btn-large">Learn more &raquo;</a>
+	</p>
+</div>
 
-	<div id="searchMusic">
-		Search for a music
-		<br/><br/>
-		<form action="<c:url value="/music/search"/>" name="MusicForm" method="get">
-			<input class="ui-autocomplete-input" name="music" id="musicInput" value="Search Here" size="100" 
-			autocomplete="list"/>
-			<button type="submit" id="submit">
-				<fmt:message key="send" />
-			</button>
+<!-- Example row of columns -->
+<div class="row-fluid">
+	<div class="span4" id="searchMusic">
+		<h2>Musics</h2>
+		<form action="<c:url value="/music/search"/>" name="MusicForm"
+			method="get">
+			<input class="ui-autocomplete-input" name="music" id="musicInput"
+				value="Search Here" size="100" autocomplete="list" />
+			<button type="submit" id="search" class="btn">Search</button>
 		</form>
 	</div>
-	
-	<div id="playlistSearch">
-		Search for a user playlist
-		<br/><br/>
-		<form action="<c:url value="/playlist"/>" name="MusicForm" method="get">
-			<input name="user.name" id="userInput" value="Type a user name" size="100" />
-			<button type="submit" id="submit">
-				<fmt:message key="send" />
-			</button>
-		</form>
+	<div class="span4">
+		<h2>PlayLists</h2>
+		<p>Then you can make your playlist.</p>
+		<p>
+			<a class="btn" href="#">View details &raquo;</a>
+		</p>
 	</div>
-	
+	<div class="span4">
+		<h2>Find Friends</h2>
+		<p>You can look for friends that have the similar tast for it.</p>
+		<p>
+			<a class="btn" href="#">View details &raquo;</a>
+		</p>
+	</div>
+</div>
+
+<style type="text/css">
+.ui-autocomplete {
+	max-height: 100px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+	/* add padding to account for vertical scrollbar */
+	padding-right: 20px;
+}
+
+.ui-autocomplete-loading {
+	background: white url('/images/loading.gif') right center no-repeat;
+}
+
+#music {
+	width: 25em;
+}
+
+.ui-autocomplete {
+	height: 100px;
+}
+</style>
 
 
+<script src="<c:url value='/js/jquery-1.7.1.js'/>"></script>
+<script src="<c:url value='/js/jquery-ui-1.8.16.js'/>"></script>
 
-	<style type="text/css">
-	   .ui-autocomplete {
-			max-height: 100px;
-			overflow-y: auto;
-			/* prevent horizontal scrollbar */
-			overflow-x: hidden;
-			/* add padding to account for vertical scrollbar */
-			padding-right: 20px;
-		}
-		.ui-autocomplete-loading { 
-			background: white url('/images/loading.gif') right center no-repeat; 
-		}
-		#music { width: 25em; }
-		.ui-autocomplete {
-			height: 100px;
-		}
-   </style>
-   		
-	<script type="text/javascript">
-     $(function(){
-    	 $("div#hide").hide();	 
-    	 $("<p>Hi there!</p>").insertAfter("#hide");
-     });
-     
-     //$("input#music").autocomplete({
-		//    source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
-	//	});
-     
-     $("div#test").click(function(){
-		 $("div#hide").fadeIn('slow');
-		 $("div#hide").html('I was hidden');
-     });
-     $("div#hide").click(function(){
-		 $("div#hide").fadeOut('fast');
-     });
-     $('input#musicInput').click(function (){
-    	 $(this).val('');
-     });
-     
-     $('#userInput').click(function (){
-    	 $(this).val('');
-     });
-     
+<script type="text/javascript">     
      
 	$( "input#musicInput" ).autocomplete({
 		source: function( request, response ) {
@@ -138,6 +107,6 @@
 	});
    </script>
 
-   
-   
-<%@ include file="../footer.jsp"%>
+
+
+<%@ include file="../../../template/footer.jsp"%>

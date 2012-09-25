@@ -1,4 +1,4 @@
-<%@ include file="../header.jsp"%>
+<%@ include file="../../../template/header.jsp"%>
 
 <div id="userMusics">
 	Musics of ${userLogged.user.login } <br /> ${musicList }
@@ -76,4 +76,4 @@
 	}
 	
 </script>
-<%@ include file="../footer.jsp"%>
+<%@ include file="../../../template/footer.jsp"%>
