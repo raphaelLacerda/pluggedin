@@ -57,7 +57,7 @@ body {
 				</a> <a class="brand" href="http://www.pluggedin.com.br">PluggedIN</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="active"><a href="<c:url value="/music/search"/>">Home</a></li>
+						<li class="active"><a href="<c:url value="/"/>">Home</a></li>
 						<li><a href="#about">Musics</a></li>
 						<li><a href="#contact">Register</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
