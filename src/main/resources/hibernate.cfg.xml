@@ -16,8 +16,8 @@
 
 
 
-		<property name="hibernate.connection.datasource">java:comp/env/jdbc/MysqlDS</property>
-<!-- 		<property name="hibernate.connection.datasource">java:jboss/datasources/MysqlDS</property> -->
+<!-- 		<property name="hibernate.connection.datasource">java:comp/env/jdbc/MysqlDS</property> -->
+		<property name="hibernate.connection.datasource">java:jboss/datasources/MysqlDS</property>
 
 
 		<!-- Hibernate Configs -->
