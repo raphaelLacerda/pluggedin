@@ -4,48 +4,45 @@
 	Musics of ${userLogged.user.login } <br /> ${musicList }
 </div>
 
-<div id="userLastMusics">
-	Your last Five Musics <br /> <br /> ${lastFiveMusics }
+<div id="userLastMusics" class="well">
+	Your last Five Musics <br /> <br /> ${musics}
 </div>
 
 
 <div id="saveMusic">
 	<form action="<c:url value="/music/save"/>" name="MusicForm"
-		method="post">
+		method="post" class="form-horizontal">
 
-		<label for="name">Name</label> 
-		<input type="text" name="music.name" id="name" value="${music.name}" /> 
-		<br/>
-		
-		<label for="description">Description</label>
-		<input type="text" name="music.description" id="description" value="${music.description}" /> 
-		<br/>
-		
-		<label for="Artist">Artist</label> 
-		<input type="text" name="music.artist" id="artist" value="${music.artist}" />
-		<br/>
-		
-		<label for="urlYoutubeVideo">UrlYoutubeVideo</label> 
-		<input type="text" name="music.urlYoutubeVideo" id="urlYoutubeVideo" value="${music.urlYoutubeVideo}" /> 
-		
+		<label for="name">Name</label> <input type="text" name="music.name"
+			id="name" value="${music.name}" /><span class="label label-important">Important</span> 
+			<br /> <label for="description">Description</label>
+		<input type="text" name="music.description" id="description"
+			value="${music.description}" /> <br /> <label for="Artist">Artist</label>
+		<input type="text" name="music.artist" id="artist"
+			value="${music.artist}" /> <br /> <label for="urlYoutubeVideo">UrlYoutubeVideo</label>
+		<input type="text" name="music.urlYoutubeVideo" id="urlYoutubeVideo"
+			value="${music.urlYoutubeVideo}" />
+
 		<div>
 			Separated by comma <input type="text" name="tags" id="tags"
 				value="${tags}" size="100" />
 		</div>
+		<div>Chords</div>
+		<div id="divChords"></div>
 		<div>
-			Chords
+			<img alt="Add here" src="<c:url value='/images/add.png'/>"
+				id="imgAdd" width="15" /> <img alt="Remove here"
+				src="<c:url value='/images/remove.png'/>" id="imgRem" width="15" />
 		</div>
-		<div id="divChords">
-		</div>
-		<div>
-			<img alt="Add here" src="<c:url value='/images/add.png'/>" id="imgAdd" width="15" />
-			<img alt="Remove here" src="<c:url value='/images/remove.png'/>" id="imgRem" width="15" />
-		</div>
-		
-		<button type="submit" id="submit">
-			<fmt:message key="send" />
-		</button>
 
+		<div class="form-actions">
+			<button type="submit" id="submit" class="btn btn-primary">
+				Save
+			</button>
+			<button type="submit" id="submit" class="btn">
+				Cancel
+			</button>
+		</div>
 	</form>
 </div>
 

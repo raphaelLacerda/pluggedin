@@ -32,15 +32,17 @@ public class MusicControllerTest extends AbstractTest {
 	@Test
 	public void listMusicswhenUserHasMoreThanFive() {
 
-		List<Music> musics = Arrays.asList(new Music(), new Music(), new Music(), new Music(), new Music(), new Music(), new Music());
+		List<Music> musics = Arrays.asList(new Music(), new Music(), new Music(), new Music(), new Music(),
+				new Music(), new Music());
 		when(musicRepo.listAllMusicsOfUser("rafa")).thenReturn(musics);
 
 		List<Music> allMusics = controller.list();
 
-		assertEquals(5, ((List) result.included("lastFiveMusics")).size());
+		assertEquals(5, ((List) result.included("musics")).size());
 		assertEquals(7, allMusics.size());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void listMusicswhenUserDoesntHaveMoreThanFive() {
 
@@ -49,8 +51,23 @@ public class MusicControllerTest extends AbstractTest {
 
 		List<Music> allMusics = controller.list();
 
-		assertNull(result.included("lastFiveMusics"));
+		assertEquals(2, ((List<Music>) result.included("musics")).size());
 		assertEquals(2, allMusics.size());
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void listMusicsWhenUserIsNotLoggedIn() {
+
+		userLogged.logout();
+		List<Music> musics = Arrays.asList(new Music(), new Music(), new Music(), new Music(), new Music(),
+				new Music(), new Music());
+		when(musicRepo.listAllMusics()).thenReturn(musics);
+
+		List<Music> allMusics = controller.list();
+
+		assertEquals(7, ((List<Music>) result.included("musics")).size());
+		assertEquals(7, allMusics.size());
 	}
 
 	@Test
@@ -70,11 +87,11 @@ public class MusicControllerTest extends AbstractTest {
 		assertEquals(3, music.getTags().size());
 		verify(musicRepo, times(1)).saveMusic(music);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void saveInvalidMusic() {
-		
+
 		controller.save(null, "pluggedin, music ,test");
-		
+
 	}
 }

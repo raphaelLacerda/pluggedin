@@ -44,6 +44,9 @@ body {
 	href="<c:url value='/assets/ico/apple-touch-icon-72-precomposed.png'/>">
 <link rel="apple-touch-icon-precomposed"
 	href="<c:url value='/assets/ico/apple-touch-icon-57-precomposed.png'/>">
+<script src="<c:url value='/js/jquery-1.7.1.js'/>"></script>
+<script src="<c:url value='/js/jquery-ui-1.8.16.js'/>"></script>
+
 </head>
 
 <body>
@@ -58,8 +61,9 @@ body {
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li class="active"><a href="<c:url value="/"/>">Home</a></li>
-						<li><a href="#about">Musics</a></li>
-						<li><a href="#contact">Register</a></li>
+						<li><a href="<c:url value="/musics"/>"><i
+								class="icon-music icon-white"> </i>&nbsp;Musics</a></li>
+						<li><a href="<c:url value="/register"/>">Register</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">About <b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -71,32 +75,25 @@ body {
 					</ul>
 
 					<c:if test="${empty userLogged.user }">
-						<form class="navbar-form pull-right"
+						<form class="navbar-form pull-right form-inline"
 							action="<c:url value='/login/login'/>" name="loginForm"
 							method="post">
 
-							<input class="span2" type="text" name="user.login" id="login"
-								value="${user.login}" placeholder="Login" /> <input
-								class="span2" type="password" name="user.password" id="password"
-								value="${user.password}" placeholder="Password" />
+							<input class="input-small" type="text" name="user.login"
+								id="login" value="${user.login}" placeholder="Login" /> <input
+								class="input-small" type="password" name="user.password"
+								id="password" value="${user.password}" placeholder="Password" />
 
 							<button type="submit" class="btn">Sign In</button>
 						</form>
 					</c:if>
 
 					<c:if test="${not empty userLogged.user }">
-						<div class="navbar-form pull-right">
+						<div class="pull-right">
 							<a href="<c:url value="/logout"/>">Logout ${
 								userLogged.user.login }</a>
 						</div>
 					</c:if>
-
-					<c:forEach items="${errors }" var="error">
-						<li>${error.category} - ${error.message}</li>
-					</c:forEach>
-
-
-
 				</div>
 				<!--/.nav-collapse -->
 			</div>
@@ -105,3 +102,14 @@ body {
 
 
 	<div class="container-fluid">
+
+		<c:if test="${not empty msg or not empty errors}">
+			<div class="alert alert-block">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				${msg}
+				<c:forEach items="${errors }" var="error">
+					<li>${error.category} - ${error.message}</li>
+				</c:forEach>
+				
+			</div>
+		</c:if>

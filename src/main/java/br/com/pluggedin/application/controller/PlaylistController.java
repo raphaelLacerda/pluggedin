@@ -68,7 +68,7 @@ public class PlaylistController {
 	private void validate(User user) {
 
 		if (user == null || user.getName() == null) {
-			validator.add(new ValidationMessage("invalid", "invalid_parameter"));
+			validator.add(new ValidationMessage("Usuário não informado", ""));
 			validator.onErrorForwardTo(IndexController.class).home();
 		}
 	}
